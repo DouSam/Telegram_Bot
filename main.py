@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import time
 from bot import Bot
 from config import definindo_webhook
 
@@ -17,6 +18,7 @@ def index():
     req = request.get_json()#Pega o que foi enviado pelo Telegram
     bot = Bot()#Instacia o bot do arquivo bot.py importado no inicio
     bot.passando_dados(req)#Passa os dados da requisição para ser trabalhado.
+    time.sleep(5)#Coloquei esse sleep pois a API do google estava dando erro e ele ajudou a cortar um pouco dos erros.
     success = bot.action()#Aqui ele trata o dado e retorna o código da operação, isso pode ser melhor entendido em HTML onde o código 200 indica que tudo foi certo.
     return jsonify(success=success) #Retornando o código para o Telegram. (posso estar errado)
 
